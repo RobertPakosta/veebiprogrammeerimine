@@ -10,6 +10,23 @@
  if (isset($_POST["lastname"])){
 	 $lastname = $_POST["lastname"];
  }
+ 
+ $monthNames = ['Jaanuar','Veebruar','Märts','Aprill','Mail','Juuni','Juuli','August','September','Oktoober','November','Detsember'];
+ 
+ $currentMonth = date('n') - 1;
+	$monthOptions = ''; 
+	for($i = 0; $i < count($monthNames); $i++) {
+		$selected = '';
+		if (isset($birthmonth)) {
+			if ($birthmonth == $i) {
+			$selected = 'selected';
+			}
+		} elseif ($currentMonth == $i) {
+			$selected = 'selected';
+		}
+		$monthOptions .= '<option value="' . $i . '" ' . $selected . ' >' . $monthNames[$i] . '</option>';
+	}
+ 
  ?>
 
 <!DOCTYPE html>
