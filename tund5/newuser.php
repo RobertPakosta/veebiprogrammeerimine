@@ -10,6 +10,7 @@
   $birthDate = "";
   $gender = null;
   $email = "";
+  $password = "";
   
   $monthNamesET = ["jaanuar", "veebruar", "märts", "aprill", "mai", "juuni","juuli", "august", "september", "oktoober", "november", "detsember"];
   
@@ -33,8 +34,29 @@
 	  $firstNameError = "Palun sisesta oma eesnimi!";
     }
 	
-  if (isset($_POST["lastname"])){
+  if(isset($_POST["submitUserData"]))	
+
+  if (isset($_POST["lastname"]) and !empty($_POST["lastname"])){
 	$lastName = test_input($_POST["lastname"]);
+    } else {
+	 $lastNameError = "Palun sisesta oma perekonnanimi!";
+  }
+  
+  if(isset($_POST["submitUserData"]))	
+
+  if (isset($_POST["email"]) and !empty($_POST["email"])){
+	$email = test_input($_POST["email"]);
+    } else {
+	 $emailError = "Palun sisesta oma e-maili aadress!";
+  }
+    
+  if(isset($_POST["submitUserData"]))	
+
+  if (isset($_POST["password"]) and !empty($_POST["password"])){
+	$password = test_input($_POST["password"]);
+	// strlen($_POST["password"]) >=8
+    } else {
+	 $passwordError = "Palun sisesta oma parool!";
   }
   
   //kas sugu on märgitud
@@ -95,7 +117,7 @@
     <label>Eesnimi: </label><br>
     <input type="text" name="firstname" value="<?php echo $firstName; ?>"><span><?php echo $firstNameError; ?></span><br>
     <label>Perekonnanimi: </label><br>
-    <input type="text" name="lastname"><br>
+	<input type="text" name="lastname" value="<?php echo $lastName; ?>"><span><?php echo $lastNameError; ?></span><br>
 	<label>Sünnipäev: </label>
 	  <?php
 	    echo '<select name="birthDay">' ."\n";
@@ -146,9 +168,9 @@
 	  <br>
 	  
 	  <label>E-postiaadress (kasutajatunnuseks): </label><br>
-      <input type="email" name="email"><br>
+      <input type="text" name="$email" value="<?php echo $email; ?>"><span><?php echo $emailError; ?></span><br>
       <label>Salasõna (min 8 märki): </label><br>
-      <input type="password" name="password"><br>
+      <input type="text" name="$password" value="<?php echo $password; ?>"><span><?php echo $passwordError; ?></span><br>
 	  
 	  <input type="submit" name="submitUserData" value="Loo kasutaja">
   </form>
