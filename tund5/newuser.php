@@ -82,7 +82,6 @@
 	  }
   
    }#kas on üldse nuppu vajutatud lõppeb
-   #echo "$birthDateError";
    
    //parooli pikkuse kontroll: strlen($_POST["password"]) >=8
    
