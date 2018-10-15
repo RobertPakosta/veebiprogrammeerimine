@@ -3,14 +3,14 @@
   
   //kui pole sisse loginud
   if(!isset($_SESSION["userId"])){
-	header("Location: index2.php");
+	header("Location: index_2.php");
     exit();	
   }
   
   //välja logimine
   if(isset($_GET["logout"])){
 	session_destroy();
-	header("Location: index2.php");
+	header("Location: index_2.php");
     exit();
   }
   

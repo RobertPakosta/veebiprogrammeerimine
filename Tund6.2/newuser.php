@@ -1,5 +1,5 @@
 <?php
-  require("functions2.php");
+  require("functions.php");
   $notice = "";
   $name = "";
   $surname = "";
@@ -100,7 +100,7 @@
   
   //kui kõik on korras, siis salvestame kasutaja
   if(empty($nameError) and empty($surnameError) and empty($birthMonthError) and empty($birthYearError) and empty($birthDayError) and empty($genderError) and empty($emailError) and empty($passwordError) and empty($confirmpasswordError)){
-  $notice = signup($name, $surname, $email, $gender, $birthDate, $_POST["password"]);
+    $notice = signup($name, $surname, $email, $gender, $birthDate, $_POST["password"]);
   }
   
   }//kui on nuppu vajutatud - lõppeb
@@ -179,7 +179,7 @@
 	  <input name="submitUserData" type="submit" value="Loo kasutaja"><span><?php echo $notice; ?></span>
 	</form>
 	<hr>
-	<p><a href="index2.php">Tagasi</a> avalehele!</p>
+	<p><a href="index_2.php">Tagasi</a> avalehele!</p>
 	
   </body>
 </html>
