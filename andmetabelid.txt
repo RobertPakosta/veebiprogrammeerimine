@@ -1,9 +1,12 @@
-anonüümsete sõnumit tabel
+anonüümsete sõnumite tabel
 
 CREATE TABLE `if18_robert_pa_1`.`vpamsg` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `message` VARCHAR(256) NOT NULL , `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `accepted` INT(1) NULL , `acceptedby` INT(11) NULL , `accepttime` TIMESTAMP NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 
-kasutajate tabel
+Kasutajate tabel
 
-CREATE TABLE `if18_robert_pa_1`.`vpusers2` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `firstname` VARCHAR(30) NOT NULL , `lastname` VARCHAR(30) NOT NULL , `birthdate` DATE NOT NULL , `gender` INT(1) NOT NULL , `email` VARCHAR(100) NOT NULL , `password` VARCHAR(60) NOT NULL , `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `if18_robert_pa_1`.`vpusers` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `firstname` VARCHAR(30) NOT NULL , `lastname` VARCHAR(30) NOT NULL , `birthdate` DATE NOT NULL , `gender` INT(1) NOT NULL , `email` VARCHAR(100) NOT NULL , `password` VARCHAR(60) NOT NULL , `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
+Kasutajaprofiilid:
+
+CREATE TABLE `if18_robert_pa_1`.`vpuserprofiles` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `userid` INT(11) NOT NULL , `description` VARCHAR(2000) NULL , `bgcolor` VARCHAR(7) NULL , `txtcolor` VARCHAR(7) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

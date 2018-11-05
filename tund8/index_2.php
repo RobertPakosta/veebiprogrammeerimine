@@ -1,5 +1,5 @@
 <?php
-  require("functions2.php");
+  require("functions.php");
   $notice = "";
   $email = "";
   $emailError = "";
@@ -48,6 +48,7 @@
 	<p><a href="addmsg.php">Lisa sõnum</a>!</p>
 	<hr>
 	<div>
+	<h2>Sõnumeid anonüümsetelt postitajatelt</h2>
 	  <?php echo allvalidmessages(); ?>
 	</div>
 	

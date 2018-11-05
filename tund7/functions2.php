@@ -6,6 +6,42 @@
   //kasutan sessiooni
   session_start();
   
+  //kõigi valideeritud sõnumite lugemine valideerija kaupa
+  function readallvalidatedmessagesbyuser(){
+	$msghtml ="";
+	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+    $stmt = $mysqli->prepare("SELECT id, firstname, lastname FROM vpusers");
+	echo $mysqli->error;
+	$stmt->bind_result($idFromDb, $firstnameFromDb, $lastnameFromDb);
+	
+	$stmt2 = $mysqli->prepare("SELECT message, accepted FROM vpamsg WHERE acceptedby=?");
+	$stmt2->bind_param("i", $idFromDb);
+	$stmt2->bind_result($msgFromDb, $acceptedFromDb);
+	
+	$stmt->execute();
+	//et saadud tulemus püsiks ja oleks kasutatav järgmises päringus ($stmt2)
+
+	$stmt->store_result();
+	
+	while($stmt->fetch()){
+	 $msghtml .= "<h3>" .$firstnameFromDb ." " .$lastnameFromDb ."</h3> \n";
+	 $stmt2->execute();
+	 while($stmt2->fetch()){
+		$msghtml .= "<p><b>";
+		if($acceptedFromDb == 1) {
+		$msghtml .= "Lubatud: ";
+		} else {
+			$msghtml .= "Keelatud :";
+		}
+		$msghtml .= "</b>" .$msgFromDb ."</p> \n";
+	 }//while $stmt2 fetch
+	}//while $stmt fetch
+	$stmt2->close();
+	$stmt->close();
+	$mysqli->close();
+	return $msghtml;	
+  }
+  
   //valitud sõnumi lugemine valideerimiseks
   function readmsgforvalidation($editId){
 	$notice = "";
@@ -46,7 +82,7 @@
   function signin($email, $password){
 	$notice = "";
 	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-	$stmt = $mysqli->prepare("SELECT id, firstname, lastname, password FROM vpusers2 WHERE email=?");
+	$stmt = $mysqli->prepare("SELECT id, firstname, lastname, password FROM vpusers WHERE email=?");
 	echo $mysqli->error;
 	$stmt->bind_param("s", $email);
 	$stmt->bind_result($idFromDb, $firstnameFromDb, $lastnameFromDb, $passwordFromDb);
@@ -96,7 +132,7 @@
 		$notice = "Sellise kasutajatunnusega (" .$email .") kasutaja on juba olemas! Uut kasutajat ei salvestatud!";
 	} else {
 		$stmt->close();
-		$stmt = $mysqli->prepare("INSERT INTO vpusers2 (firstname, lastname, birthdate, gender, email, password) VALUES(?,?,?,?,?,?)");
+		$stmt = $mysqli->prepare("INSERT INTO vpusers (firstname, lastname, birthdate, gender, email, password) VALUES(?,?,?,?,?,?)");
     	echo $mysqli->error;
 	    $options = ["cost" => 12, "salt" => substr(sha1(rand()), 0, 22)];
 	    $pwdhash = password_hash($password, PASSWORD_BCRYPT, $options);

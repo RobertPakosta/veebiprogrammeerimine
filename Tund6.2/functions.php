@@ -1,6 +1,6 @@
 <?php
-  require("../../../config.php.php");
-  $database = "if18_rinde";
+  require("../../../config.php");
+  $database = "if18_robert_pa_1";
   //echo $serverHost;
   
   //kasutan sessiooni
